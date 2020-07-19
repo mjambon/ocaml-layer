@@ -31,4 +31,4 @@ echo 'or equivalently as'
 echo '  eval $(opam env) && COMMAND'
 echo
 eval $(opam env)
-"EOF"
+EOF
