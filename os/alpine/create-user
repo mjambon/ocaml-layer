@@ -15,8 +15,8 @@ error() {
 user="$1"
 echo "Creating user '$user'"
 
-adduser -S -u 1000 -g 1000 "$user"
+adduser -S -u 1000 -g 1000 "$user" --shell /bin/bash
 echo '"$user" ALL=(ALL:ALL) NOPASSWD:ALL' > /etc/sudoers.d/"$user"
 chmod 440 /etc/sudoers.d/"$user"
 chown root:root /etc/sudoers.d/"$user"
-sed -i.bak 's/^Defaults.*requiretty//g' /etc/sudoers
+sed -i.bak 's/^Defaults.*requiretty/# \1/g' /etc/sudoers
