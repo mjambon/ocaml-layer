@@ -158,7 +158,7 @@ print_create_user() {
   if [[ -n "$create_user" ]]; then
     cat <<EOF
 COPY os/$os/create-user ocaml-setup/os/create-user
-RUN ./ocaml-setup/os/create-user 'create_user'
+RUN ./ocaml-setup/os/create-user $create_user
 USER $create_user
 WORKDIR /home/$create_user
 EOF
