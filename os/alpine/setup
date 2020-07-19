@@ -1,6 +1,7 @@
 #! /bin/sh
 #
 # General system setup for Alpine Linux prior to installing Opam.
+# From https://github.com/mjambon/setup-ocaml
 #
 set -eu
 

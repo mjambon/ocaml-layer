@@ -1,6 +1,7 @@
 #! /usr/bin/env bash
 #
 # Create a non-privileged user on Alpine.
+# From https://github.com/mjambon/setup-ocaml
 #
 set -eu
 

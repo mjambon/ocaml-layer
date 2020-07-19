@@ -1,6 +1,7 @@
 #! /usr/bin/env bash
 #
 # Put together a Dockerfile from options specified on the command line.
+# From https://github.com/mjambon/setup-ocaml
 #
 set -eu -o pipefail
 

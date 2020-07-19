@@ -1,6 +1,7 @@
 #! /usr/bin/env bash
 #
 # Install opam packages specified on the command line.
+# From https://github.com/mjambon/setup-ocaml
 #
 set -eu
 

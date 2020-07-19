@@ -1,6 +1,7 @@
 #! /bin/sh
 #
 # Install opam, ocaml compilers and standard library.
+# From https://github.com/mjambon/setup-ocaml
 #
 set -eu
 
@@ -22,7 +23,8 @@ git config --global user.name "Docker"
 opam init --disable-sandboxing
 opam switch create "$switch"
 
-cat >> ~/.profile <<"EOF"
+cat >> ~/.bash_profile <<"EOF"
+# From https://github.com/mjambon/setup-ocaml
 echo 'Running "eval $(opam env)", which initializes PATH and other variables.'
 echo
 echo 'In scripts and dockerfiles, don't forget to run your commands as
