@@ -1,0 +1,8 @@
+#! /usr/bin/env bash
+#
+# Install opam packages specified on the command line.
+#
+set -eu
+
+packages=$(echo "$1" | sed -e 's/,/ /g')
+opam install -y $packages
