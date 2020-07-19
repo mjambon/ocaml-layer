@@ -63,6 +63,7 @@ error() {
 
 os="$default_os"
 cmd="$default_cmd"
+no_cmd=false
 from=''
 no_from=false
 create_user=''
@@ -70,18 +71,23 @@ dockerfile=''
 opam_packages="$default_opam_packages"
 opam_switch="$default_opam_switch"
 
+# The commands like '$(echo $...)' are for squashing multiline input into
+# a single line, for compatibility with dockerfile syntax. At the time
+# of writing the dockerfiles, certains things like lists of packages will
+# be formatted as multiple lines regardless.
+#
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --cmd)
-      cmd=$2
+      cmd=$(echo $2)
       shift
     ;;
     --from)
-      from=$2
+      from=$(echo $2)
       shift
     ;;
     --create-user)
-      create_user=$2
+      create_user=$(echo $2)
       shift
     ;;
     --help)
@@ -99,11 +105,11 @@ while [[ $# -gt 0 ]]; do
       shift
     ;;
     --opam-packages)
-      opam_packages=$2
+      opam_packages=$(echo $2)
       shift
     ;;
     --opam-switch)
-      opam_switch=$2
+      opam_switch=$(echo $2)
       shift
     ;;
     --os)
@@ -135,11 +141,24 @@ if [[ -z "$from" ]]; then
   esac
 fi
 
+# Print one argument per line, ending each line except the last by a backslash.
+#
+multiline() {
+  while [[ $# -gt 1 ]]; do
+    echo "$1"' \'
+    echo -n "  "
+    shift
+  done
+  if [[ $# = 1 ]]; then
+    echo "$1"
+  fi
+}
+
 print_create_user() {
   if [[ -n "$create_user" ]]; then
     cat <<EOF
 COPY os/$os/create-user ocaml-setup/os/create-user
-RUN ./ocaml-setup/os/create-user '$create_user'
+RUN ./ocaml-setup/os/create-user 'create_user'
 USER $create_user
 WORKDIR /home/$create_user
 EOF
@@ -167,7 +186,6 @@ COPY opam/install-ocaml ocaml-setup/opam/install-ocaml
 RUN ./ocaml-setup/opam/install-ocaml '$opam_switch'
 
 COPY opam/install-opam-packages ocaml-setup/opam/install-opam-packages
-RUN ./ocaml-setup/opam/install-opam-packages '$opam_packages'
-
-$([[ "$no_cmd" = true ]] || echo -n "CMD $cmd")
+RUN $(multiline ./ocaml-setup/opam/install-opam-packages $opam_packages)
+$([[ "$no_cmd" = true ]] || (echo; echo "CMD $cmd") )
 EOF
