@@ -4,7 +4,7 @@ The goal is to set up a cachable build environment on which one can
 build OCaml software. Requirements include:
 
 * Pre-installing all the external dependencies needed by the user's
-  specific project. For example, a list of opam packages is to be provided
+  projects. A list of opam packages is to be provided
   by the user. By "external dependency", we mean any dependency that
   doesn't change too often. These shouldn't be rebuilt each time the
   user wants to test new code, because it wastes time.
