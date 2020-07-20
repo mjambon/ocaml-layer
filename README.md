@@ -1,43 +1,58 @@
-# Templates for setting up an OCaml build environment
+# Make and host your own OCaml base image
 
-The goal is to set up a cachable build environment, such as a Docker
-base image, on which one can build OCaml software. Requirements
-include:
+The goal is to set up a cachable build environment on which one can
+build OCaml software. Requirements include:
 
 * Pre-installing all the external dependencies needed by the user's
-  specific project. For example, a list of Opam packages is to be provided
-  by the user.
+  specific project. For example, a list of opam packages is to be provided
+  by the user. By "external dependency", we mean any dependency that
+  doesn't change too often. These shouldn't be rebuilt each time the
+  user wants to test new code, because it wastes time.
 * Composability with other setup scripts. For example, we may want to
   set up a Go development environment as well, so we need to ability
   to use a base Docker image that comes with Go pre-installed.
-
-Plan:
-
-* Offer a setup script for Alpine Linux, which allows building
-  OCaml/C/C++ static executables out of the box.
-* Offer a simple process for specifying the Opam switch and the
-  collection of Opam packages.
-* Offer a simple process for building and uploading Docker images to
-  Docker Hub for use in CI (CircleCI, Travis CI, GitHub Actions,
-  Jenkins, etc.).
+  The user should be able to specify the base image of their choice as
+  long as it falls within a supported family e.g. "Alpine" or
+  "Debian-like".
+* Easy customization by forking and editing this project.
 
 Usage
 --
 
-Basic usage is as follows:
+For evaluation purposes, you can simply run `make` and watch
+an image being built with the default settings.
 
-```
-git clone https://github.com/mjambon/setup-ocaml
-cd setup-ocaml
-./builder/build-dockerfile -o Dockerfile
-docker build -t ocaml .
-docker run -it ocaml
-```
+For actual use, follow these steps:
 
-This can be used or customized in various ways. You can:
+1. Create your own Docker repository on the
+   [Docker Hub](https://hub.docker.com/) registry or elsewhere.
+2. Fork this git repository or create a branch.
+3. Edit `config.sh` to suit your needs.
+4. Run `make` to build a Docker image locally.
+5. Run `make push` to upload the image.
+6. Use this image as a base image in your CI jobs.
 
-* Generate a customized Dockerfile by passing command-line options to
-  `build-dockerfile`.
-* Fork this repository and edit the scripts.
-* Generate a Dockerfile once and edit it.
-* Concatenate the generated Dockerfile with another.
+Suggestions
+--
+
+* For testing multiple versions of OCaml, you may want to create and
+  maintain one git branch per version.
+* If you're an individual open-source developer, you may want to
+  target two versions of OCaml: the minimum version that you're
+  willing to support and the latest version.
+* The community [`ocaml/opam2` images](https://hub.docker.com/r/ocaml/opam2/)
+  support many flavors of operating systems already and are maintained
+  for you. You probably should use those if the speed of routine CI
+  builds isn't a priority for you.
+
+Unknowns
+--
+
+Please suggest answers if you know them!
+
+* Docker Hub provides a way to automatically build images when your
+  git repository changes. Some code to set this up would be nice. I
+  don't know how it works.
+* Docker Hub doesn't seem to provide periodic builds. It would be
+  handy to upgrade packages on a daily or weekly basis.
+  Is there a simple solution for this?
