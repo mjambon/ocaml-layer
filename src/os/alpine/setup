@@ -5,6 +5,9 @@
 #
 set -eu
 
+# The command line arguments are a list of extra packages to install.
+extra_packages=$*
+
 echo '@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing' \
      >> /etc/apk/repositories
 
@@ -31,6 +34,7 @@ packages="
   sudo
   tar
   xz
+  $extra_packages
 "
 
 apk add $packages

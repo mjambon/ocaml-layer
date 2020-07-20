@@ -20,6 +20,7 @@ cp -a src/create-dockerfile tmp
   ./create-dockerfile -o Dockerfile \
     --from "$from" \
     --create-user "$user" \
+    --extra-packages "$extra_packages" \
     --opam-packages "$opam_packages"
   docker build -t "$docker_url" .
 

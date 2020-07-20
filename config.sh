@@ -18,6 +18,10 @@ docker_url="mjambon/ocaml:alpine"
 # User to create and use. If it already exists, we'll try to use it.
 user="user"
 
+# Extra packages to be installed by the native package manager.
+extra_packages="
+"
+
 # The collection of opam packages we want to install. Go wild.
 opam_packages="
   dune
