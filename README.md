@@ -14,6 +14,8 @@ build OCaml software. Requirements include:
   The user should be able to specify the base image of their choice as
   long as it falls within a supported family e.g. "Alpine" or
   "Debian-like".
+* No need to know OCaml or to have OCaml installed on your machine to
+  set this up.
 * Easy customization by forking and editing this project.
 
 Usage
@@ -40,10 +42,10 @@ Suggestions
 * If you're an individual open-source developer, you may want to
   target two versions of OCaml: the minimum version that you're
   willing to support and the latest version.
-* The community [`ocaml/opam2` images](https://hub.docker.com/r/ocaml/opam2/)
-  support many flavors of operating systems already and are maintained
-  for you. You probably should use those if the speed of routine CI
-  builds isn't a priority for you.
+* The [ocaml/opam2 images](https://hub.docker.com/r/ocaml/opam2/)
+  already support many flavors of operating systems and are
+  graciously maintained for you. You probably should use those if the
+  speed of routine CI builds isn't a priority for you.
 
 Unknowns
 --
