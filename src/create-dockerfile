@@ -156,16 +156,24 @@ multiline() {
 }
 
 print_create_user() {
-  if [[ -n "$create_user" ]]; then
+  case "$create_user" in
+    '')
+      echo
+      ;;
+    root)
+      cat <<EOF
+USER root
+WORKDIR /root
+EOF
+      ;;
+    *)
     cat <<EOF
-COPY os/$os/create-user ocaml-setup/os/create-user
-RUN ./ocaml-setup/os/create-user $create_user
+COPY os/$os/create-user .ocaml-setup/os/create-user
+RUN ./.ocaml-setup/os/create-user $create_user
 USER $create_user
 WORKDIR /home/$create_user
 EOF
-  else
-    echo
-  fi
+  esac
 }
 
 if [[ -n "$dockerfile" ]]; then
@@ -179,14 +187,14 @@ cat <<EOF
 # Provided by https://github.com/mjambon/setup-ocaml
 #
 $([[ "$no_from" = true ]] || echo "FROM $from")
-COPY os/$os/setup ocaml-setup/os/setup
-RUN ./ocaml-setup/os/setup
+COPY os/$os/setup .ocaml-setup/os/setup
+RUN ./.ocaml-setup/os/setup
 
 $(print_create_user)
-COPY opam/install-ocaml ocaml-setup/opam/install-ocaml
-RUN ./ocaml-setup/opam/install-ocaml '$opam_switch'
+COPY opam/install-ocaml .ocaml-setup/opam/install-ocaml
+RUN ./.ocaml-setup/opam/install-ocaml '$opam_switch'
 
-COPY opam/install-opam-packages ocaml-setup/opam/install-opam-packages
-RUN $(multiline ./ocaml-setup/opam/install-opam-packages $opam_packages)
+COPY opam/install-opam-packages .ocaml-setup/opam/install-opam-packages
+RUN $(multiline ./.ocaml-setup/opam/install-opam-packages $opam_packages)
 $([[ "$no_cmd" = true ]] || (echo; echo "CMD $cmd") )
 EOF

@@ -1,0 +1,11 @@
+#! /usr/bin/env bash
+#
+# Push Docker images to Docker Hub.
+# From https://github.com/mjambon/dockerhub-images
+#
+set -eu
+
+. ./config.sh
+
+echo "Pushing '$docker_url'."
+docker push "$docker_url"

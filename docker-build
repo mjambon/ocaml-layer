@@ -1,0 +1,28 @@
+#! /usr/bin/env bash
+#
+# Build or update Docker images locally.
+# From https://github.com/mjambon/dockerhub-images
+#
+set -eu
+
+. ./config.sh
+
+rm -rf tmp
+mkdir -p tmp
+
+mkdir -p tmp/os
+cp -a src/os/"$os" tmp/os
+cp -a src/opam tmp
+cp -a src/create-dockerfile tmp
+
+(
+  cd tmp
+  ./create-dockerfile -o Dockerfile \
+    --from "$from" \
+    --create-user "$user" \
+    --opam-packages "$opam_packages"
+  docker build -t "$docker_url" .
+
+  # Sanity check.
+  docker run -t "$docker_url" opam exec -- ocamlc -v
+)

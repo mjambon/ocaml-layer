@@ -1,12 +1,12 @@
-#
-# This makefile serves as a demo of some of the available scripts.
-#
-
+# Generate Dockerfile from config.sh and build docker image.
 .PHONY: build
 build:
-	./builder/build-dockerfile -o Dockerfile --create-user user
-	docker build -t ocaml .
-	docker run -t ocaml opam exec -- ocamlc -v
+	./docker-build
+
+# Push docker image to Docker Hub or other registry.
+.PHONY: push
+push:
+	./docker-push
 
 .PHONY: clean
 clean:
