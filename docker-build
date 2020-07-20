@@ -1,7 +1,7 @@
 #! /usr/bin/env bash
 #
 # Build or update Docker images locally.
-# From https://github.com/mjambon/dockerhub-images
+# From https://github.com/mjambon/setup-ocaml
 #
 set -eu
 
