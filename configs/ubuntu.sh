@@ -3,6 +3,8 @@
 # for pushing it to a docker registry.
 #
 
+. ./common-config.sh
+
 # The OS family. Determines which collection of install scripts to use.
 # Currently, choices are 'alpine' or 'ubuntu'.
 os="ubuntu"
@@ -19,10 +21,4 @@ docker_url="mjambon/r2c-ocaml:ubuntu"
 user="user"
 
 # Extra packages to be installed by the native package manager.
-extra_packages="
-  perl
-  pkg-config
-  python3
-"
-
-. ./common-config.sh
+extra_packages="$extra_deb_packages"

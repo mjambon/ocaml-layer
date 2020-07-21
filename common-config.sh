@@ -1,5 +1,27 @@
 # To be included in configs/*.sh
 
+# Extra packages to be installed by the native package manager.
+#
+# pfff needs perl.
+# tree-sitter needs pkg-config, npm/node, python (for node-gyp).
+
+# Alpine
+extra_apk_packages="
+  nodejs
+  npm
+  perl
+  python3
+"
+
+# Ubuntu
+extra_deb_packages="
+  nodejs
+  npm
+  perl
+  pkg-config
+  python3
+"
+
 # The collection of opam packages we want to install. Go wild.
 opam_packages="
   alcotest
