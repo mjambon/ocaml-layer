@@ -1,0 +1,30 @@
+#! /bin/sh
+#
+# General system setup for Ubuntu prior to installing Opam.
+# From https://github.com/mjambon/setup-ocaml
+#
+set -eu
+
+# The command line arguments are a list of extra packages to install.
+extra_packages=$*
+
+apt-get update
+
+packages="
+  bubblewrap
+  build-essential
+  curl
+  git
+  libcap-dev
+  libx11-dev
+  nano
+  rsync
+  sudo
+  unzip
+  $extra_packages
+"
+
+apt-get install -y $packages
+
+git config --global user.email "docker@example.com"
+git config --global user.name "Docker"

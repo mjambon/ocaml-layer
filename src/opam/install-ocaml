@@ -23,7 +23,7 @@ git config --global user.name "Docker"
 opam init --disable-sandboxing
 opam switch create "$switch"
 
-cat >> ~/.bash_profile <<"EOF"
+cat >> ~/.bashrc <<"EOF"
 # From https://github.com/mjambon/setup-ocaml
 echo 'Running "eval $(opam env)", which initializes PATH and other variables.'
 echo

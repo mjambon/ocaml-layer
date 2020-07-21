@@ -5,7 +5,7 @@
 #
 set -eu -o pipefail
 
-default_cmd='bash -l'
+default_cmd='bash'
 default_os=alpine
 default_extra_packages=''
 default_opam_packages='dune'
@@ -54,8 +54,8 @@ Options:
       Default, subject to change: '$default_opam_switch'.
   --os OS
       Specify the container's OS family. Currently, the choices are
-      'alpine' or 'debian'. For Ubuntu, choose 'debian'. 'alpine' is
-      recommended for building statically-linked executables.
+      'alpine' or 'ubuntu'. 'alpine' is recommended for building
+      statically-linked executables.
       Default: '$default_os'.
 EOF
 }
@@ -125,7 +125,7 @@ while [[ $# -gt 0 ]]; do
     --os)
       os=$2
       case "$os" in
-        alpine|debian)
+        alpine|ubuntu)
           ;;
         *)
           error "Unsupported value for --os: '$os'"
@@ -143,8 +143,8 @@ if [[ -z "$from" ]]; then
     alpine)
       from="alpine"
       ;;
-    debian)
-      from="debian"
+    ubuntu)
+      from="ubuntu"
       ;;
     *)
       error "Cannot derive 'FROM' field from OS value '$os'. Try '--from'."
@@ -206,4 +206,6 @@ RUN ./.ocaml-setup/opam/install-ocaml '$opam_switch'
 COPY opam/install-opam-packages .ocaml-setup/opam/install-opam-packages
 RUN $(multiline ./.ocaml-setup/opam/install-opam-packages $opam_packages)
 $([[ "$no_cmd" = true ]] || (echo; echo "CMD $cmd") )
+
+COPY Dockerfile /Dockerfile
 EOF

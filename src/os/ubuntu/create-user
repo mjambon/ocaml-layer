@@ -1,0 +1,27 @@
+#! /usr/bin/env bash
+#
+# Create a non-privileged user on a Debian-based OS.
+# From https://github.com/mjambon/setup-ocaml
+#
+set -eu
+
+error() {
+  echo "Error: $*" >&2
+  exit 1
+}
+
+[[ $# = 1 ]] || error "Exactly one argument is expected, a user name."
+
+user="$1"
+
+if id -u "$user" > /dev/null 2>&1 ]]; then
+  echo "Not creating user '$user' since it already exists."
+else
+  echo "Creating user '$user'."
+  addgroup "$user"
+  adduser --ingroup "$user" --disabled-password "$user" --gecos ''
+  echo "$user ALL=(ALL:ALL) NOPASSWD:ALL" > /etc/sudoers.d/"$user"
+  chmod 440 /etc/sudoers.d/"$user"
+  chown root:root /etc/sudoers.d/"$user"
+  sed -i.bak 's/^Defaults.*requiretty//g' /etc/sudoers
+fi

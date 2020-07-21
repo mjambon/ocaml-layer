@@ -4,7 +4,7 @@
 #
 
 # The OS family. Determines which collection of install scripts to use.
-# Currently, 'alpine' is the only choice.
+# Currently, choices are 'alpine' or 'ubuntu'.
 os="alpine"
 
 # The argument of the FROM line in the dockerfile. This is the docker
