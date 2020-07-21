@@ -22,8 +22,4 @@ user="user"
 extra_packages="
 "
 
-# The collection of opam packages we want to install. Go wild.
-opam_packages="
-  dune
-  utop
-"
+. ./common-config.sh
