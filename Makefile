@@ -12,7 +12,15 @@ push:
 # of using 'config.sh'.
 .PHONY: all
 all:
+	$(MAKE) build-all
+	$(MAKE) push-all
+
+.PHONY: build-all
+build-all:
 	./docker-build configs/*
+
+.PHONY: push-all
+push-all:
 	./docker-push configs/*
 
 .PHONY: clean
