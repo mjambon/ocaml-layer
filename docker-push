@@ -1,11 +1,32 @@
 #! /usr/bin/env bash
 #
 # Push Docker images to Docker Hub.
+# This step is meant to follow './docker-build'.
+#
 # From https://github.com/mjambon/setup-ocaml
+#
+# Usage: ./docker-push [CONFIG_FILE1 CONFIG_FILE2 ...]
+#
+# Each config file is used separately to define a Docker image.
+# If no argument is given, a single config file 'config.sh' is assumed.
 #
 set -eu
 
-. ./config.sh
+configs="config.sh"
 
-echo "Pushing '$docker_url'."
-docker push "$docker_url"
+if [[ $# -gt 0 ]]; then
+  configs=$*
+fi
+
+build() {
+  (
+    . ./"$config"
+
+    echo "Pushing '$docker_url'."
+    docker push "$docker_url"
+  )
+}
+
+for config in $configs; do
+  build
+done

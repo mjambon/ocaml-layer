@@ -34,6 +34,9 @@ For actual use, follow these steps:
 5. Run `make push` to upload the image.
 6. Use this image as a base image in your CI jobs.
 
+If you want to maintain multiple images, put the config files into
+`configs/` and run `make all`. This will use them instead of `config.sh`.
+
 Suggestions
 --
 

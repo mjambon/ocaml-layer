@@ -3,28 +3,47 @@
 # Build or update Docker images locally.
 # From https://github.com/mjambon/setup-ocaml
 #
+# Usage: ./docker-build [CONFIG_FILE1 CONFIG_FILE2 ...]
+#
+# Each config file is used separately to build a Docker image.
+# If no argument is given, a single config file 'config.sh' is assumed.
+#
 set -eu
 
-. ./config.sh
+configs="config.sh"
 
-rm -rf tmp
-mkdir -p tmp
+if [[ $# -gt 0 ]]; then
+  configs=$*
+fi
 
-mkdir -p tmp/os
-cp -a src/os/"$os" tmp/os
-cp -a src/opam tmp
-cp -a src/create-dockerfile tmp
+build() {
+  (
+    . ./"$config"
 
-(
-  cd tmp
-  ./create-dockerfile -o Dockerfile \
-    --os "$os" \
-    --from "$from" \
-    --create-user "$user" \
-    --extra-packages "$extra_packages" \
-    --opam-packages "$opam_packages"
-  docker build -t "$docker_url" .
+    rm -rf tmp
+    mkdir -p tmp
 
-  # Sanity check.
-  docker run -t "$docker_url" opam exec -- ocamlc -v
-)
+    mkdir -p tmp/os
+    cp -a src/os/"$os" tmp/os
+    cp -a src/opam tmp
+    cp -a src/create-dockerfile tmp
+
+    (
+      cd tmp
+      ./create-dockerfile -o Dockerfile \
+        --os "$os" \
+        --from "$from" \
+        --create-user "$user" \
+        --extra-packages "$extra_packages" \
+        --opam-packages "$opam_packages"
+      docker build -t "$docker_url" .
+
+      # Sanity check.
+      docker run -t "$docker_url" opam exec -- ocamlc -v
+    )
+  )
+}
+
+for config in $configs; do
+  build
+done
