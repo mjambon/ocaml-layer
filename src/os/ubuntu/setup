@@ -18,6 +18,7 @@ packages="
   libcap-dev
   libx11-dev
   nano
+  opam
   rsync
   sudo
   unzip

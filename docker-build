@@ -18,6 +18,7 @@ cp -a src/create-dockerfile tmp
 (
   cd tmp
   ./create-dockerfile -o Dockerfile \
+    --os "$os" \
     --from "$from" \
     --create-user "$user" \
     --extra-packages "$extra_packages" \
