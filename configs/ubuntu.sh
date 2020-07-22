@@ -18,15 +18,13 @@ docker_url="mjambon/ocaml:ubuntu"
 # User to create and use. If it already exists, we'll try to use it.
 user="user"
 
-opam_switch="4.10.0+flambda"
-
 # Extra packages to be installed by the native package manager.
 extra_packages="
 "
 
 # Opam switch to use. This determines the OCaml version and a set of
 # configuration options.
-opam_switch="4.10.0+flambda"
+opam_switch="4.10.0"
 
 # The collection of opam packages we want to install. Go wild.
 opam_packages="
