@@ -28,7 +28,4 @@ extra_packages="$extra_deb_packages"
 opam_switch="4.10.0+flambda"
 
 # The collection of opam packages we want to install. Go wild.
-opam_packages="
-  dune
-  utop
-"
+opam_packages="$opam_packages"
