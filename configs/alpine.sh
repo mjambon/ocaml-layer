@@ -22,6 +22,10 @@ user="user"
 extra_packages="
 "
 
+# Opam switch to use. This determines the OCaml version and a set of
+# configuration options.
+opam_switch="4.10.0+flambda"
+
 # The collection of opam packages we want to install. Go wild.
 opam_packages="
   dune

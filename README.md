@@ -29,7 +29,7 @@ For actual use, follow these steps:
 1. Create your own Docker repository on the
    [Docker Hub](https://hub.docker.com/) registry or elsewhere.
 2. Fork this git repository or create a branch.
-3. Edit `config.sh` to suit your needs.
+3. Run `make init` to create `config.sh`, then edit it to suit your needs.
 4. Run `make` to build a Docker image locally.
 5. Run `make push` to upload the image.
 6. Use this image as a base image in your CI jobs.
