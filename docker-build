@@ -10,6 +10,16 @@
 #
 set -eu
 
+# Defaults
+os="alpine"
+from="alpine:3.12.0"
+docker_url="mjambon/ocaml:alpine"
+user="user"
+extra_packages=""
+opam_switch="4.10.0"
+opam_packages="dune utop"
+
+# Override defaults.
 configs="config.sh"
 
 if [[ $# -gt 0 ]]; then
@@ -18,7 +28,12 @@ fi
 
 build() {
   (
-    . ./"$config"
+    if [[ -f "$config" ]]; then
+      echo "Build from config '$config'."
+      . ./"$config"
+    else
+      echo "Build with default settings."
+    fi
 
     rm -rf tmp
     mkdir -p tmp
@@ -35,7 +50,8 @@ build() {
         --from "$from" \
         --create-user "$user" \
         --extra-packages "$extra_packages" \
-        --opam-packages "$opam_packages"
+        --opam-packages "$opam_packages" \
+        --opam-switch "$opam_switch"
       docker build -t "$docker_url" .
 
       # Sanity check.
