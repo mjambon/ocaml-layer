@@ -1,33 +1,31 @@
-# Generate Dockerfile from config.sh and build a docker image.
+#
+# Usage:
+# - 'make' for building the Docker images specified by SELECTED_CONFIGS.
+# - 'make push' for pushing these images to your registry e.g. Docker Hub.
+#
+
+ifndef SELECTED_CONFIGS
+  # The list of configuration files, one per image that you want to build
+  # when running 'make' and 'make push'.
+  SELECTED_CONFIGS = configs/alpine.sh
+endif
+export SELECTED_CONFIGS
+
+# Generate a Dockerfile for each config file and build a docker image.
 .PHONY: build
-build: config.sh
-	./docker-build
+build:
+	./docker-build $(SELECTED_CONFIGS)
 
-# Create an initial 'config.sh' to be used by 'make build' and 'make push'.
-.PHONY: init
-init: config.sh
-config.sh:
-	test -e config.sh || cp configs/alpine.sh config.sh
-
-# Push the docker image to Docker Hub or some other registry.
+# Push the docker images to Docker Hub or some other registry.
 .PHONY: push
 push:
-	./docker-push
+	./docker-push $(SELECTED_CONFIGS)
 
-# Build and push for each configuration file found in 'configs/' instead
-# of using 'config.sh'.
+# Build and push.
 .PHONY: all
 all:
-	$(MAKE) build-all
-	$(MAKE) push-all
-
-.PHONY: build-all
-build-all:
-	./docker-build configs/*
-
-.PHONY: push-all
-push-all:
-	./docker-push configs/*
+	$(MAKE) build
+	$(MAKE) push
 
 .PHONY: clean
 clean:

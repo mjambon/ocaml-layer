@@ -12,8 +12,7 @@
 #
 set -eu
 
-configs="config.sh"
-
+configs=""
 if [[ $# -gt 0 ]]; then
   configs=$*
 fi

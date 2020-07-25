@@ -3,6 +3,9 @@
 # for pushing it to a docker registry.
 #
 
+# Inherit common settings.
+. ./common-config.sh
+
 # The OS family. Determines which collection of install scripts to use.
 # Currently, choices are 'alpine' or 'ubuntu'.
 os="ubuntu"
@@ -19,15 +22,11 @@ docker_url="mjambon/ocaml:ubuntu"
 user="user"
 
 # Extra packages to be installed by the native package manager.
-extra_packages="
-"
+extra_packages="$extra_deb_packages"
 
 # Opam switch to use. This determines the OCaml version and a set of
 # configuration options.
 opam_switch="4.10.0"
 
 # The collection of opam packages we want to install. Go wild.
-opam_packages="
-  dune
-  utop
-"
+opam_packages="$opam_packages"

@@ -22,25 +22,23 @@ Usage
 --
 
 For evaluation purposes, you can simply run `make` and watch
-an image being built with the default settings.
+an image being built with some default settings.
 
 For actual use, follow these steps:
 
-1. Create your own Docker repository on the
-   [Docker Hub](https://hub.docker.com/) registry or elsewhere.
-2. Fork this git repository or create a branch.
-3. Run `make` to build a Docker image locally.
-4. Run `make push` to upload the image.
-5. Use this image as a base image in your CI jobs.
-
-If you want to maintain multiple images, put the config files into
-`configs/` and run `make all`. This will use them instead of `config.sh`.
+1. Create your own Docker repository on
+   [Docker Hub](https://hub.docker.com/) or some other registry.
+2. Fork this git repository.
+3. Add packages to the lists in `common-config.sh`.
+4. Create or edit one configuration file per container, in `configs/`.
+5. Adjust the `SELECTED_CONFIGS` variable in the `Makefile`.
+6. Run `make` to build the Docker images.
+7. Run `make push` to upload the images.
+8. Use these images as base images in your CI jobs.
 
 Suggestions
 --
 
-* For testing multiple versions of OCaml, you may want to create and
-  maintain one git branch per version.
 * If you're an individual open-source developer, you may want to
   target two versions of OCaml: the minimum version that you're
   willing to support and the latest version.
