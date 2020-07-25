@@ -1,13 +1,13 @@
 # Generate Dockerfile from config.sh and build a docker image.
 .PHONY: build
-build:
+build: config.sh
 	./docker-build
 
 # Create an initial 'config.sh' to be used by 'make build' and 'make push'.
 .PHONY: init
 init: config.sh
 config.sh:
-	cp configs/alpine.sh config.sh
+	test -e config.sh || cp configs/alpine.sh config.sh
 
 # Push the docker image to Docker Hub or some other registry.
 .PHONY: push
