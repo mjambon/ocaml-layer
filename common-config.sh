@@ -4,12 +4,14 @@
 
 # Alpine
 extra_apk_packages="
+  graphviz
   nano
   python3
 "
 
 # Ubuntu
 extra_deb_packages="
+  graphviz
   nano
   python3
 "
