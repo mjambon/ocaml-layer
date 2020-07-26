@@ -8,21 +8,21 @@ jobs:
   build:
     docker:
       - image: circleci/buildpack-deps:stretch
-        steps:
-          - checkout
+    steps:
+      - checkout
 
-          # Work around "no docker within no docker".
-          - setup_remote_docker
+      # Work around "no docker within no docker".
+      - setup_remote_docker
 
-          - run:
-              name: Build
-              command: make build
-          - run:
-              name: Login
-              command: ./.circleci/docker-login
-          - run:
-              name: Push
-              command: make push
+      - run:
+          name: Build
+          command: make build
+      - run:
+          name: Login
+          command: ./.circleci/docker-login
+      - run:
+          name: Push
+          command: make push
 
 workflows:
   version: 2
@@ -39,15 +39,15 @@ workflows:
 #                - mjambon
 
     jobs:
-      build:
-        # Use the CircleCI context that holds our DockerHub login
-        # credentials and exposes them as environment variables
-        # DOCKERHUB_USER and DOCKERHUB_PASS.
-        context: dockerhub
+      - build:
+          # Use the CircleCI context that holds our DockerHub login
+          # credentials and exposes them as environment variables
+          # DOCKERHUB_USER and DOCKERHUB_PASS.
+          context: dockerhub
 
-        # Run only on these branches (each pushing different images)
-        filters:
-          branches:
-            only:
-              - master
-              - mjambon
+          # Run only on these branches (each pushing different images)
+          filters:
+            branches:
+              only:
+                - master
+                - mjambon
