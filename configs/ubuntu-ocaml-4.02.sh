@@ -16,7 +16,7 @@ from="ubuntu"
 
 # This is the argument of 'docker pull', 'docker push', etc. for the image
 # we are building.
-docker_url="mjambon/mj-ocaml-4.03:ubuntu"
+docker_url="mjambon/mj-ocaml-4.02:ubuntu"
 
 # User to create and use. If it already exists, we'll try to use it.
 user="user"
