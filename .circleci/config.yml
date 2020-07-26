@@ -31,7 +31,7 @@ workflows:
     triggers:
       - schedule:
           # Run at 10:00 every Wednesday, UTC.
-          cron: "0 10 * * wed"
+          cron: "0 10 * * 3"
           filters:
             branches:
               only:
