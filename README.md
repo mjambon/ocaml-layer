@@ -36,6 +36,9 @@ For actual use, follow these steps:
 7. Run `make push` to upload the images.
 8. Use these images as base images in your CI jobs.
 
+You can reuse and adapt the [CircleCI config](.circleci/config) of
+this repo to rebuild your images on a weekly basis or so.
+
 Suggestions
 --
 
