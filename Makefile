@@ -9,7 +9,9 @@ ifndef SELECTED_CONFIGS
   # when running 'make' and 'make push'.
   SELECTED_CONFIGS = \
     configs/alpine.sh \
-    configs/ubuntu.sh
+    configs/ubuntu.sh \
+    configs/alpine-ocaml-4.02.sh \
+    configs/ubuntu-ocaml-4.02.sh
 endif
 export SELECTED_CONFIGS
 
