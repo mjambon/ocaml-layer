@@ -28,15 +28,15 @@ workflows:
   version: 2
   build:
     # Rebuild periodically rather than based on git changes.
-#    triggers:
-#      - schedule:
-#          # Run at 10:00 every Wednesday, UTC.
-#          cron: "0 10 * * wed"
-#          filters:
-#            branches:
-#              only:
-#                - master
-#                - mjambon
+    triggers:
+      - schedule:
+          # Run at 10:00 every Wednesday, UTC.
+          cron: "0 10 * * wed"
+          filters:
+            branches:
+              only:
+                - master
+                - mjambon
 
     jobs:
       - build:
