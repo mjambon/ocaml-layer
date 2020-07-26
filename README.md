@@ -49,15 +49,3 @@ Suggestions
   already support many flavors of operating systems and are
   graciously maintained for you. You probably should use those if the
   speed of routine CI builds isn't a priority for you.
-
-Unknowns
---
-
-Please suggest answers if you know them!
-
-* Docker Hub provides a way to automatically build images when your
-  git repository changes. Some code to set this up would be nice. I
-  don't know how it works.
-* Docker Hub doesn't seem to provide periodic builds. It would be
-  handy to upgrade packages on a daily or weekly basis.
-  Is there a simple solution for this?
