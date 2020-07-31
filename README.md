@@ -7,7 +7,7 @@ Bring your team's OCaml CI jobs down to 1 min.
 Motivation
 --
 
-The goal is to set up a cachable build environment on which one can
+The goal is to set up a cached build environment on which one can
 build OCaml software.
 
 * Pre-install all the external dependencies - opam packages and more.
