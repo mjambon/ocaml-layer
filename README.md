@@ -2,7 +2,7 @@ ocaml-layer
 ==
 [![CircleCI badge](https://circleci.com/gh/mjambon/ocaml-layer.svg?style=svg)](https://app.circleci.com/pipelines/github/mjambon/ocaml-layer)
 
-Bring your OCaml CI jobs down to 1 min.
+Bring your team's OCaml CI jobs down to 1 min.
 
 Motivation
 --
