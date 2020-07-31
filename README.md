@@ -37,6 +37,18 @@ For actual use, follow these steps:
 You can reuse and adapt the [CircleCI config](.circleci/config.yml) of
 this repo to rebuild your images on a weekly basis or so.
 
+Example
+--
+
+The config I use for my own needs is
+[common-config.sh](https://github.com/mjambon/ocaml-layer/blob/mjambon/common-config.sh)
+and [configs](https://github.com/mjambon/ocaml-layer/tree/mjambon/configs).
+The Docker images end up on Docker Hub:
+[minimum OCaml version](https://hub.docker.com/repository/docker/mjambon/mj-ocaml-4.02)
+and [latest OCaml](https://hub.docker.com/repository/docker/mjambon/mj-ocaml).
+They are updated weekly using CircleCI
+([config](https://github.com/mjambon/ocaml-layer/blob/mjambon/.circleci/config.yml)).
+
 Suggestions
 --
 
