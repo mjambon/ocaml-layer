@@ -7,15 +7,14 @@ Bring your team's OCaml CI jobs down to 1 min.
 Motivation
 --
 
-The goal is to set up a cached build environment on which one can
-build OCaml software.
+The goal is to set up a cached build environment on which your team can
+compile and test their own OCaml software, quickly every time.
 
 * Pre-install all the external dependencies - opam packages and more.
-* You can start from the base Docker image of your choice.
-* Admin-friendly. Maintenance requires no OCaml knowledge.
-* Easy customization by forking and editing the project.
-* Can be tested locally. Not tied to the caching features of a
-  specific CI vendor.
+* Start from the base Docker image of your choice.
+* It's admin-friendly. Maintenance requires no OCaml knowledge.
+* Customize by forking and editing this git repo.
+* It's Docker. Reproducible locally and not tied to a CI vendor's caching.
 
 Usage
 --
