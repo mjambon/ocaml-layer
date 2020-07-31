@@ -1,4 +1,6 @@
-# Make and host your own OCaml base image
+ocaml-layer - Make and host your own OCaml base image
+==
+[![CircleCI badge](https://circleci.com/gh/mjambon/ocaml-layer.svg?style=svg)](https://app.circleci.com/pipelines/github/mjambon/ocaml-layer)
 
 The goal is to set up a cachable build environment on which one can
 build OCaml software. Requirements include:
