@@ -44,8 +44,8 @@ The config I use for my own needs is
 [common-config.sh](https://github.com/mjambon/ocaml-layer/blob/mjambon/common-config.sh)
 and [configs](https://github.com/mjambon/ocaml-layer/tree/mjambon/configs).
 The Docker images end up on Docker Hub:
-[minimum OCaml version](https://hub.docker.com/repository/docker/mjambon/mj-ocaml-4.02)
-and [latest OCaml](https://hub.docker.com/repository/docker/mjambon/mj-ocaml).
+[minimum OCaml version](https://hub.docker.com/r/mjambon/mj-ocaml-4.02/tags)
+and [latest OCaml](https://hub.docker.com/r/mjambon/mj-ocaml/tags).
 They are updated weekly using CircleCI
 ([config](https://github.com/mjambon/ocaml-layer/blob/mjambon/.circleci/config.yml)).
 
