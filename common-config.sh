@@ -23,6 +23,7 @@ opam_packages="
   batteries
   containers
   cmdliner
+  csv
   dune
   ocamlgraph
   sexplib
