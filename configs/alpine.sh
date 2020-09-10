@@ -16,7 +16,7 @@ from="alpine:3.12.0"
 
 # This is the argument of 'docker pull', 'docker push', etc. for the image
 # we are building.
-docker_url="mjambon/r2c-ocaml:alpine"
+docker_url="returntocorp/ocaml:alpine"
 
 # User to create and use. If it already exists, we'll try to use it.
 user="user"
