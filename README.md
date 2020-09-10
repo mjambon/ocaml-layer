@@ -1,47 +1,57 @@
-# Make and host your own OCaml base image
+ocaml-layer
+==
+[![CircleCI badge](https://circleci.com/gh/mjambon/ocaml-layer.svg?style=svg)](https://app.circleci.com/pipelines/github/mjambon/ocaml-layer)
 
-The goal is to set up a cachable build environment on which one can
-build OCaml software. Requirements include:
+Bring your team's OCaml CI jobs down to 1 min.
 
-* Pre-installing all the external dependencies needed by the user's
-  projects. A list of opam packages is to be provided
-  by the user. By "external dependency", we mean any dependency that
-  doesn't change too often. These shouldn't be rebuilt each time the
-  user wants to test new code, because it wastes time.
-* Composability with other setup scripts. For example, we may want to
-  set up a Go development environment as well, so we need to ability
-  to use a base Docker image that comes with Go pre-installed.
-  The user should be able to specify the base image of their choice as
-  long as it falls within a supported family e.g. "Alpine" or
-  "Debian-like".
-* No need to know OCaml or to have OCaml installed on your machine to
-  set this up.
-* Easy customization by forking and editing this project.
+Motivation
+--
+
+The goal is to set up a cached build environment on which your team can
+compile and test their own OCaml software, quickly every time.
+
+* Pre-install all the external dependencies - opam packages and more.
+* Start from the base Docker image of your choice.
+* It's admin-friendly. Maintenance requires no OCaml knowledge.
+* Customize by forking and editing this git repo.
+* It's Docker. Reproducible locally and not tied to a CI vendor's caching.
 
 Usage
 --
 
 For evaluation purposes, you can simply run `make` and watch
-an image being built with the default settings.
+an image being built with some default settings.
 
 For actual use, follow these steps:
 
-1. Create your own Docker repository on the
-   [Docker Hub](https://hub.docker.com/) registry or elsewhere.
-2. Fork this git repository or create a branch.
-3. Run `make init` to create `config.sh`, then edit it to suit your needs.
-4. Run `make` to build a Docker image locally.
-5. Run `make push` to upload the image.
-6. Use this image as a base image in your CI jobs.
+1. Create your own Docker repository on
+   [Docker Hub](https://hub.docker.com/) or some other registry.
+2. Fork this git repository.
+3. Add packages to the lists in `common-config.sh`.
+4. Create or edit one configuration file per container, in `configs/`.
+5. Adjust the `SELECTED_CONFIGS` variable in the `Makefile`.
+6. Run `make` to build the Docker images.
+7. Run `make push` to upload the images.
+8. Use these images as base images in your CI jobs.
 
-If you want to maintain multiple images, put the config files into
-`configs/` and run `make all`. This will use them instead of `config.sh`.
+You can reuse and adapt the [CircleCI config](.circleci/config.yml) of
+this repo to rebuild your images on a weekly basis or so.
+
+Example
+--
+
+The config I use for my own needs is
+[common-config.sh](https://github.com/mjambon/ocaml-layer/blob/mjambon/common-config.sh)
+and [configs](https://github.com/mjambon/ocaml-layer/tree/mjambon/configs).
+The Docker images end up on Docker Hub:
+[minimum OCaml version](https://hub.docker.com/r/mjambon/mj-ocaml-4.02/tags)
+and [latest OCaml](https://hub.docker.com/r/mjambon/mj-ocaml/tags).
+They are updated weekly using CircleCI
+([config](https://github.com/mjambon/ocaml-layer/blob/mjambon/.circleci/config.yml)).
 
 Suggestions
 --
 
-* For testing multiple versions of OCaml, you may want to create and
-  maintain one git branch per version.
 * If you're an individual open-source developer, you may want to
   target two versions of OCaml: the minimum version that you're
   willing to support and the latest version.
@@ -49,15 +59,3 @@ Suggestions
   already support many flavors of operating systems and are
   graciously maintained for you. You probably should use those if the
   speed of routine CI builds isn't a priority for you.
-
-Unknowns
---
-
-Please suggest answers if you know them!
-
-* Docker Hub provides a way to automatically build images when your
-  git repository changes. Some code to set this up would be nice. I
-  don't know how it works.
-* Docker Hub doesn't seem to provide periodic builds. It would be
-  handy to upgrade packages on a daily or weekly basis.
-  Is there a simple solution for this?

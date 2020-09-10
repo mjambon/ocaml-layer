@@ -3,6 +3,7 @@
 # for pushing it to a docker registry.
 #
 
+# Inherit common settings.
 . ./common-config.sh
 
 # The OS family. Determines which collection of install scripts to use.

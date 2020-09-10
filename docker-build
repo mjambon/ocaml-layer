@@ -19,9 +19,7 @@ extra_packages=""
 opam_switch="4.10.0"
 opam_packages="dune utop"
 
-# Override defaults.
-configs="config.sh"
-
+configs=""
 if [[ $# -gt 0 ]]; then
   configs=$*
 fi

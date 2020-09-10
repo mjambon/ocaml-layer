@@ -1,0 +1,53 @@
+#
+# Rebuild and publish our base Docker images for OCaml once a week.
+#
+
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: circleci/buildpack-deps:stretch
+    steps:
+      - checkout
+
+      # Work around "no docker within no docker".
+      - setup_remote_docker
+
+      - run:
+          name: Build
+          command: make build
+      - run:
+          name: Login
+          command: ./.circleci/docker-login
+      - run:
+          name: Push
+          command: make push
+
+workflows:
+  version: 2
+  build:
+    # Rebuild periodically rather than based on git changes.
+    triggers:
+      - schedule:
+          # Run at 10:00 every Wednesday, UTC.
+          cron: "0 10 * * 3"
+          filters:
+            branches:
+              only:
+                - master
+                - mjambon
+
+    jobs:
+      - build:
+          # Use the CircleCI context that holds our DockerHub login
+          # credentials and exposes them as environment variables
+          # DOCKERHUB_USER and DOCKERHUB_PASS.
+          context: dockerhub
+
+          # Run only on these branches (each pushing different images)
+          filters:
+            branches:
+              only:
+                - master
+                - mjambon
