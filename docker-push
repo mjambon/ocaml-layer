@@ -11,7 +11,7 @@
 #
 set -eu
 
-for docker_url in $(cat tmp/all-docker-urls); do
+for docker_url in $(cat pushme); do
   echo "Pushing '$docker_url'."
   docker push "$docker_url"
 done
