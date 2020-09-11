@@ -78,16 +78,15 @@ build() {
       docker run -t "$docker_url" opam exec -- ocamlc -v
     )
 
-    echo "$docker_url" >> "$all_docker_urls"
+    echo "$docker_url" >> "$pushme"
     for url in "${extra_docker_urls[@]}"; do
-      echo "$url" >> "$all_docker_urls"
+      echo "$url" >> "$pushme"
     done
   )
 }
 
-mkdir -p tmp
-all_docker_urls=tmp/all-docker-urls
-rm -f "$all_docker_urls"
+pushme=pushme
+rm -f "$pushme"
 for config in $configs; do
   build
 done
