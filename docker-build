@@ -8,17 +8,34 @@
 # Each config file is used separately to build a Docker image.
 # If no argument is given, a single config file 'config.sh' is assumed.
 #
+# The list of destination docker URLs (tags) is saved to a temporary file
+# which will be consulted our 'docker-push' script.
+#
 set -eu
+
+# YYYY-MM-DD date, made available to all the config files, which can
+# use it for tagging the docker images.
+#
+date=$(date +%F)
 
 # Defaults
 os="alpine"
 from="alpine:3.12.0"
-docker_url="mjambon/ocaml:alpine"
 user="user"
 extra_packages=""
 opam_switch="4.10.0"
 opam_packages="dune utop"
 
+docker_url="mjambon/ocaml:alpine"
+
+# This is a bash array. Requires bash >= 4.4.
+# Example:
+#
+#   extra_docker_urls=("$docker_url-$date")
+#
+extra_docker_urls=()
+
+# Each command line argument is a path to a config file.
 configs=""
 if [[ $# -gt 0 ]]; then
   configs=$*
@@ -41,6 +58,11 @@ build() {
     cp -a src/opam tmp
     cp -a src/create-dockerfile tmp
 
+    extra_build_options=()
+    for url in "${extra_docker_urls[@]}"; do
+      extra_build_options+=( -t "$url" )
+    done
+
     (
       cd tmp
       ./create-dockerfile -o Dockerfile \
@@ -50,14 +72,22 @@ build() {
         --extra-packages "$extra_packages" \
         --opam-packages "$opam_packages" \
         --opam-switch "$opam_switch"
-      docker build -t "$docker_url" .
+      docker build -t "$docker_url" "${extra_build_options[@]}" .
 
       # Sanity check.
       docker run -t "$docker_url" opam exec -- ocamlc -v
     )
+
+    echo "$docker_url" >> "$all_docker_urls"
+    for url in "${extra_docker_urls[@]}"; do
+      echo "$url" >> "$all_docker_urls"
+    done
   )
 }
 
+mkdir -p tmp
+all_docker_urls=tmp/all-docker-urls
+rm -f "$all_docker_urls"
 for config in $configs; do
   build
 done

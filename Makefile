@@ -19,7 +19,7 @@ build:
 # Push the docker images to Docker Hub or some other registry.
 .PHONY: push
 push:
-	./docker-push $(SELECTED_CONFIGS)
+	./docker-push
 
 # Build and push.
 .PHONY: all
