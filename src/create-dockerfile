@@ -34,6 +34,11 @@ Options:
   --extra-packages PKG1,PKG2,PKG3
       A comma-separated or whitespace-separated list of package names to
       be installed with the native package manager.
+  --force-tag TAG
+      Force a full rebuild if the TAG is different from the last one used.
+      This produces a dummy RUN command at the beginning of the dockerfile,
+      forcing docker to rebuild the subsequent layers unless this tag
+      isn't new.
   --help
       Print this help message and exit.
   --no-cmd
@@ -74,6 +79,7 @@ no_from=false
 create_user=''
 dockerfile=''
 extra_packages="$default_extra_packages"
+force_tag=''
 opam_packages="$default_opam_packages"
 opam_switch="$default_opam_switch"
 
@@ -98,6 +104,10 @@ while [[ $# -gt 0 ]]; do
     ;;
     --extra-packages)
       extra_packages=$(echo $2)
+      shift
+    ;;
+    --force-tag)
+      force_tag=$(echo $2)
       shift
     ;;
     --help)
@@ -196,7 +206,12 @@ cat <<EOF
 # Provided by https://github.com/mjambon/setup-ocaml
 #
 $([[ "$no_from" = true ]] || echo "FROM $from")
+
+# Force a rebuild when the following line changes.
+RUN echo "$force_tag"
+
 COPY os/$os/setup .ocaml-setup/os/setup
+
 RUN $(multiline ./.ocaml-setup/os/setup $extra_packages)
 
 $(print_create_user)
