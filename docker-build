@@ -20,6 +20,7 @@ date=$(date +%F)
 
 # Defaults
 os="alpine"
+force_tag="$date"
 from="alpine:3.12.0"
 user="user"
 extra_packages=""
@@ -68,6 +69,7 @@ build() {
       ./create-dockerfile -o Dockerfile \
         --os "$os" \
         --from "$from" \
+        --force-tag "$force_tag" \
         --create-user "$user" \
         --extra-packages "$extra_packages" \
         --opam-packages "$opam_packages" \
