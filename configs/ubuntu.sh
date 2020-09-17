@@ -17,6 +17,7 @@ from="ubuntu"
 # This is the argument of 'docker pull', 'docker push', etc. for the image
 # we are building.
 docker_url="returntocorp/ocaml:ubuntu"
+extra_docker_urls=("$docker_url-$date")
 
 # User to create and use. If it already exists, we'll try to use it.
 user="user"
