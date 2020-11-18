@@ -34,6 +34,7 @@ opam_packages="
   dune-glob
   easy_logging_yojson
   grain_dypgen
+  lsp
   menhir
   num
   ocamlfind
