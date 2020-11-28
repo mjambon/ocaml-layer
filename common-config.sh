@@ -21,7 +21,7 @@ opam_packages="
   alcotest
   atdgen
   batteries
-  containers
+  containers-data
   cmdliner
   csv
   dune
