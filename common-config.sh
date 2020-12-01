@@ -39,6 +39,7 @@ opam_packages="
   num
   ocamlfind
   ocamlgraph
+  ocp-indent
   ounit2
   parmap
   ppx_deriving
