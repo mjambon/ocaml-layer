@@ -16,7 +16,7 @@ from="ubuntu"
 
 # This is the argument of 'docker pull', 'docker push', etc. for the image
 # we are building.
-docker_url="mjambon/mj-ocaml-4.02:ubuntu"
+docker_url="mjambon/mj-ocaml-4.03:ubuntu"
 
 # User to create and use. If it already exists, we'll try to use it.
 user="user"
@@ -26,7 +26,7 @@ extra_packages="$extra_deb_packages"
 
 # Opam switch to use. This determines the OCaml version and a set of
 # configuration options.
-opam_switch="4.02.3"
+opam_switch="4.03.0"
 
 # The collection of opam packages we want to install. Go wild.
 opam_packages="$opam_packages"
