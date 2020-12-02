@@ -26,6 +26,7 @@ jobs:
 
 workflows:
   version: 2
+
   build:
     # Rebuild periodically rather than based on git changes.
     triggers:
@@ -51,3 +52,15 @@ workflows:
               only:
                 - master
                 - mjambon
+
+  # Any change pushed to the branch 'build-on-push' will trigger a build.
+  # [workflow name]
+  build-on-push:
+    jobs:
+      # [job name]
+      - build:
+          filters:
+            branches:
+              only:
+                # [branch name]
+                - build-on-push
