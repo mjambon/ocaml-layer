@@ -30,6 +30,7 @@ packages="
   opam
   openssl
   patch
+  py-pip
   rsync
   sudo
   tar
@@ -38,6 +39,9 @@ packages="
 "
 
 apk add $packages
+
+# no apk package for this one
+pip3 install --ignore-installed pre-commit
 
 git config --global user.email "docker@example.com"
 git config --global user.name "Docker"

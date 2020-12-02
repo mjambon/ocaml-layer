@@ -19,6 +19,7 @@ packages="
   libx11-dev
   nano
   opam
+  python3-pip
   rsync
   sudo
   unzip
@@ -26,6 +27,9 @@ packages="
 "
 
 DEBIAN_FRONTEND=noninteractive apt-get install -y $packages
+
+# no deb package for this one
+pip3 install pre-commit
 
 git config --global user.email "docker@example.com"
 git config --global user.name "Docker"
