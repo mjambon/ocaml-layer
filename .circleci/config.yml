@@ -59,6 +59,7 @@ workflows:
     jobs:
       # [job name]
       - build:
+          context: dockerhub
           filters:
             branches:
               only:
