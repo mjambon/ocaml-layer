@@ -43,6 +43,7 @@ opam_packages="
   ounit2
   parmap
   ppx_deriving
+  ppx_hash
   ppx_sexp_conv
   re
   sexplib
