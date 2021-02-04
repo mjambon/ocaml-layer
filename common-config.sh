@@ -9,12 +9,14 @@
 extra_apk_packages="
   nodejs
   npm
+  pcre-dev
   perl
   python3
 "
 
 # Ubuntu
 extra_deb_packages="
+  libpcre3-dev
   nodejs
   npm
   perl
@@ -27,6 +29,7 @@ opam_packages="
   alcotest
   ansiterminal
   atdgen
+  bloomf
   cmdliner
   conf-perl
   conf-pkg-config
@@ -41,6 +44,7 @@ opam_packages="
   ocamlgraph
   ocp-indent
   ounit2
+  pcre
   parmap
   ppx_deriving
   ppx_hash
