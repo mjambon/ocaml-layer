@@ -24,7 +24,7 @@ force_tag="$date"
 from="alpine:3.12.0"
 user="user"
 extra_packages=""
-opam_switch="4.10.0"
+opam_switch="4.12.0"
 opam_packages="dune utop"
 
 docker_url="mjambon/ocaml:alpine"
