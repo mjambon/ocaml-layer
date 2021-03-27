@@ -35,6 +35,7 @@ opam_packages="
   conf-pkg-config
   dune
   dune-glob
+  easy_logging
   easy_logging_yojson
   grain_dypgen
   lsp
@@ -44,8 +45,10 @@ opam_packages="
   ocamlgraph
   ocp-indent
   ounit2
+  lsp.1.1.0
   pcre
   parmap
+  ppxlib.0.15.0
   ppx_deriving
   ppx_hash
   ppx_sexp_conv
