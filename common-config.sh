@@ -38,14 +38,13 @@ opam_packages="
   easy_logging
   easy_logging_yojson
   grain_dypgen
-  lsp
+  lsp.1.1.0
   menhir
   num
   ocamlfind
   ocamlgraph
   ocp-indent
   ounit2
-  lsp.1.1.0
   pcre
   parmap
   ppxlib.0.15.0
