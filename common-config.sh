@@ -2,7 +2,6 @@
 
 # Extra packages to be installed by the native package manager.
 #
-# pfff needs perl.
 # tree-sitter needs pkg-config, npm/node, python (for node-gyp).
 
 # Alpine
@@ -10,7 +9,6 @@ extra_apk_packages="
   nodejs
   npm
   pcre-dev
-  perl
   python3
 "
 
@@ -19,7 +17,6 @@ extra_deb_packages="
   libpcre3-dev
   nodejs
   npm
-  perl
   pkg-config
   python3
 "
@@ -31,7 +28,7 @@ opam_packages="
   atdgen
   bloomf
   cmdliner
-  conf-perl
+  comby.1.4.0
   conf-pkg-config
   dune
   dune-glob
