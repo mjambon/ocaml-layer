@@ -28,7 +28,7 @@ opam_packages="
   atdgen
   bloomf
   cmdliner
-  comby.1.4.0
+  comby-kernel.1.4.1
   conf-pkg-config
   dune
   dune-glob
