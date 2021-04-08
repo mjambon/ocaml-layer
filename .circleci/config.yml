@@ -62,7 +62,7 @@ workflows:
 
     jobs:
       - build:
-          # Run only on these branches (each pushing different images)
+          # Run only on the main branch.
           filters:
             branches:
               only:
