@@ -13,6 +13,8 @@ error() {
 [ $# = 1 ] || error "Exactly one argument is expected, the opam switch."
 
 switch="$1"
+shift
+switch_options="$*"
 
 mkdir -p .ssh
 chmod 700 .ssh
@@ -21,7 +23,7 @@ git config --global user.email "docker@example.com"
 git config --global user.name "Docker"
 
 opam init --disable-sandboxing
-opam switch create "$switch"
+opam switch create "$switch" $switch_options
 
 cat >> ~/.bashrc <<"EOF"
 # From https://github.com/mjambon/setup-ocaml
