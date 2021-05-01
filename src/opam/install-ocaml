@@ -10,8 +10,6 @@ error() {
   exit 1
 }
 
-[ $# = 1 ] || error "Exactly one argument is expected, the opam switch."
-
 switch="$1"
 shift
 switch_options="$*"
