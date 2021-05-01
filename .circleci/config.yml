@@ -69,16 +69,3 @@ workflows:
               only:
                 - master
                 - mjambon
-
-  # Any change pushed to the branch 'build-on-push' will trigger a build.
-  # [workflow name]
-  build-on-push:
-    jobs:
-      # [job name]
-      - build:
-          context: dockerhub
-          filters:
-            branches:
-              only:
-                # [branch name]
-                - build-on-push
