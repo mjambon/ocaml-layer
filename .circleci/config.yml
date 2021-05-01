@@ -5,7 +5,7 @@
 version: 2.1
 
 jobs:
-  build:
+  build-and-push:
     docker:
       - image: circleci/buildpack-deps:stretch
     steps:
@@ -24,9 +24,27 @@ jobs:
           name: Push
           command: make push
 
+  build-only:
+    docker:
+      - image: circleci/buildpack-deps:stretch
+    steps:
+      - checkout
+
+      # Work around "no docker within no docker".
+      - setup_remote_docker
+
+      - run:
+          name: Build
+          command: make build
+
 workflows:
   version: 2
-  build:
+
+  build-on-push:
+    jobs:
+      - build-only
+
+  build-and-push-weekly:
     # Rebuild periodically rather than based on git changes.
     triggers:
       - schedule:
@@ -39,7 +57,7 @@ workflows:
                 - mjambon
 
     jobs:
-      - build:
+      - build-and-push:
           # Use the CircleCI context that holds our DockerHub login
           # credentials and exposes them as environment variables
           # DOCKERHUB_USER and DOCKERHUB_PASS.
