@@ -27,5 +27,7 @@ packages="
 
 DEBIAN_FRONTEND=noninteractive apt-get install -y $packages
 
-git config --global user.email "docker@example.com"
-git config --global user.name "Docker"
+if [ -z "$(git config user.email)" ]; then
+  git config --global user.email "docker@example.com"
+  git config --global user.name "Docker"
+fi
