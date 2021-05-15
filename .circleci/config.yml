@@ -5,7 +5,7 @@
 version: 2.1
 
 jobs:
-  build:
+  build-and-push:
     docker:
       - image: circleci/buildpack-deps:stretch
     steps:
@@ -24,31 +24,27 @@ jobs:
           name: Push
           command: make push
 
-#
-# Build and push a docker image for each change on the main branch and
-# weekly.
-#
-# This occurs after merging a PR or after pushing directly to the main
-# branch. We also build an image every week to keep things fresh since
-# it updates the list of available opam packages and installs the
-# latest version of unpinned packages.
-#
-# Images get tagged with a date like '2021-04-08'. If multiple images
-# get built on the same day, they will overwrite each other, which is
-# fine.
-#
+  build-only:
+    docker:
+      - image: circleci/buildpack-deps:stretch
+    steps:
+      - checkout
+
+      # Work around "no docker within no docker".
+      - setup_remote_docker
+
+      - run:
+          name: Build
+          command: make build
+
 workflows:
   version: 2
-  build-on-master-push:
-    jobs:
-      - build:
-          filters:
-            branches:
-              only:
-                - master
-                - main
 
-  build-weekly:
+  build-on-push:
+    jobs:
+      - build-only
+
+  build-and-push-weekly:
     # Rebuild periodically rather than based on git changes.
     triggers:
       - schedule:
@@ -61,8 +57,13 @@ workflows:
                 - main
 
     jobs:
-      - build:
-          # Run only on the main branch.
+      - build-and-push:
+          # Use the CircleCI context that holds our DockerHub login
+          # credentials and exposes them as environment variables
+          # DOCKERHUB_USER and DOCKERHUB_PASS.
+          context: dockerhub
+
+          # Run only on these branches (each pushing different images)
           filters:
             branches:
               only:

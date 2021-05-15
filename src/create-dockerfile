@@ -9,7 +9,8 @@ default_cmd='bash'
 default_os=alpine
 default_extra_packages=''
 default_opam_packages='dune'
-default_opam_switch='4.10.0'
+default_opam_switch='4.12.0'
+default_opam_switch_options=''
 
 usage() {
   cat <<EOF
@@ -57,6 +58,12 @@ Options:
       This specifies which version of OCaml to use, optionally with
       some special setup. Run 'opam switch list-available' to see the choices.
       Default, subject to change: '$default_opam_switch'.
+  --opam-switch-options OPTIONS
+      Experimental. Allows passing extra arguments to the
+      'opam switch create SWITCH' command. The OPTIONS string will be split
+      on whitespace. It is intended for creating custom switches using
+      the '--packages' option of 'opam switch create'.
+      Default: '$default_opam_switch_options'
   --os OS
       Specify the container's OS family. Currently, the choices are
       'alpine' or 'ubuntu'. 'alpine' is recommended for building
@@ -82,6 +89,7 @@ extra_packages="$default_extra_packages"
 force_tag=''
 opam_packages="$default_opam_packages"
 opam_switch="$default_opam_switch"
+opam_switch_options="$default_opam_switch_options"
 
 # The commands like '$(echo $...)' are for squashing multiline input into
 # a single line, for compatibility with dockerfile syntax. At the time
@@ -130,6 +138,10 @@ while [[ $# -gt 0 ]]; do
     ;;
     --opam-switch)
       opam_switch=$(echo $2)
+      shift
+    ;;
+    --opam-switch-options)
+      opam_switch_options=$(echo $2)
       shift
     ;;
     --os)
@@ -216,7 +228,7 @@ RUN $(multiline ./.ocaml-setup/os/setup $extra_packages)
 
 $(print_create_user)
 COPY opam/install-ocaml .ocaml-setup/opam/install-ocaml
-RUN ./.ocaml-setup/opam/install-ocaml '$opam_switch'
+RUN ./.ocaml-setup/opam/install-ocaml '$opam_switch' $opam_switch_options
 
 COPY opam/install-opam-packages .ocaml-setup/opam/install-opam-packages
 RUN $(multiline ./.ocaml-setup/opam/install-opam-packages $opam_packages)

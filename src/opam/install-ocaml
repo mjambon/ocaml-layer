@@ -5,26 +5,19 @@
 #
 set -eu
 
-error() {
-  echo "Error: $*" >&2
-  exit 1
-}
-
-[ $# = 1 ] || error "Exactly one argument is expected, the opam switch."
-
-switch="$1"
-
 mkdir -p .ssh
 chmod 700 .ssh
 
-git config --global user.email "docker@example.com"
-git config --global user.name "Docker"
+if [ -z "$(git config user.email)" ]; then
+  git config --global user.email "docker@example.com"
+  git config --global user.name "Docker"
+fi
 
 opam init --disable-sandboxing
-opam switch create "$switch"
+opam switch create "$@"
 
 cat >> ~/.bashrc <<"EOF"
-# From https://github.com/mjambon/setup-ocaml
+# From https://github.com/mjambon/ocaml-layer
 echo 'Running "eval $(opam env)", which initializes PATH and other variables.'
 echo
 echo 'In scripts and dockerfiles, don't forget to run your commands as
