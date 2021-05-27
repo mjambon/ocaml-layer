@@ -58,11 +58,6 @@ workflows:
 
     jobs:
       - build-and-push:
-          # Use the CircleCI context that holds our DockerHub login
-          # credentials and exposes them as environment variables
-          # DOCKERHUB_USER and DOCKERHUB_PASS.
-          context: dockerhub
-
           # Run only on these branches (each pushing different images)
           filters:
             branches:
