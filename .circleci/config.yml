@@ -48,8 +48,8 @@ workflows:
     # Rebuild periodically rather than based on git changes.
     triggers:
       - schedule:
-          # Run at 10:00 every Wednesday, UTC.
-          cron: "0 10 * * 3"
+          # Run at 07:00 every Wednesday, UTC.
+          cron: "0 07 * * 3"
           filters:
             branches:
               only:
