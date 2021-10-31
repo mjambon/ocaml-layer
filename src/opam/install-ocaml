@@ -20,7 +20,7 @@ cat >> ~/.bashrc <<"EOF"
 # From https://github.com/mjambon/ocaml-layer
 echo 'Running "eval $(opam env)", which initializes PATH and other variables.'
 echo
-echo 'In scripts and dockerfiles, don't forget to run your commands as
+echo "In scripts and dockerfiles, don't forget to run your commands as"
 echo '  opam exec -- COMMAND'
 echo 'or equivalently as'
 echo '  eval $(opam env) && COMMAND'
