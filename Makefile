@@ -11,9 +11,7 @@ ifndef SELECTED_CONFIGS
     configs/alpine.sh \
     configs/ubuntu.sh \
     configs/alpine-ocaml-4.08.sh \
-    configs/ubuntu-ocaml-4.08.sh \
-    configs/alpine-ocaml-4.03.sh \
-    configs/ubuntu-ocaml-4.03.sh
+    configs/ubuntu-ocaml-4.08.sh
 endif
 export SELECTED_CONFIGS
 
