@@ -8,25 +8,25 @@
 
 # The OS family. Determines which collection of install scripts to use.
 # Currently, choices are 'alpine' or 'ubuntu'.
-os="alpine"
+os="ubuntu"
 
 # The argument of the FROM line in the dockerfile. This is the docker
 # URL of the base image, optionally followed by more things.
-from="alpine:3.12.0"
+from="ubuntu"
 
 # This is the argument of 'docker pull', 'docker push', etc. for the image
 # we are building.
-docker_url="mjambon/mj-ocaml:alpine"
+docker_url="mjambon/mj-ocaml-4.08:ubuntu"
 
 # User to create and use. If it already exists, we'll try to use it.
 user="user"
 
 # Extra packages to be installed by the native package manager.
-extra_packages="$extra_apk_packages"
+extra_packages="$extra_deb_packages"
 
 # Opam switch to use. This determines the OCaml version and a set of
 # configuration options.
-opam_switch="4.13.1"
+opam_switch="4.08.1"
 
 # The collection of opam packages we want to install. Go wild.
 opam_packages="$opam_packages"
