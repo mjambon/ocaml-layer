@@ -26,7 +26,7 @@ extra_packages="$extra_apk_packages"
 
 # Opam switch to use. This determines the OCaml version and a set of
 # configuration options.
-opam_switch="4.08.1"
+opam_switch="ocaml-base-compiler.4.08.1"
 
 # The collection of opam packages we want to install. Go wild.
 opam_packages="$opam_packages"
