@@ -35,6 +35,7 @@ opam_packages="
   easy_logging.0.8.1
   easy_logging_yojson.0.8.1
   grain_dypgen
+  junit_alcotest
   lsp.1.3.0
   merlin
   menhir
