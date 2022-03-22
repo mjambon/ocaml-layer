@@ -41,7 +41,7 @@ opam_packages="
   menhir
   num
   ocamlfind
-  ocamlformat.0.16.0
+  ocamlformat.0.21.0
   ocamlgraph
   ocp-indent
   ounit2
