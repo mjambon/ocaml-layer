@@ -26,6 +26,7 @@ opam_packages="
   alcotest
   ansiterminal
   atdgen
+  atdpy
   bloomf
   cmdliner
   comby-kernel.1.4.1
