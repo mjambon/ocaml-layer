@@ -39,7 +39,7 @@ opam_packages="
   junit_alcotest
   lsp.1.3.0
   merlin
-  menhir
+  menhir.20211128
   num
   ocamlfind
   ocamlformat.0.21.0
