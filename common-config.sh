@@ -48,7 +48,7 @@ opam_packages="
   ounit2
   pcre
   parmap
-  ppxlib.0.20.0
+  ppxlib.0.22.0
   ppx_deriving
   ppx_hash
   ppx_sexp_conv
@@ -60,4 +60,5 @@ opam_packages="
   uutf
   yaml
   yojson
+  visitors.20210608
 "
