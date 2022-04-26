@@ -12,7 +12,7 @@ os="ubuntu"
 
 # The argument of the FROM line in the dockerfile. This is the docker
 # URL of the base image, optionally followed by more things.
-from="ubuntu"
+from="ubuntu:21.10"
 
 # This is the argument of 'docker pull', 'docker push', etc. for the image
 # we are building.
