@@ -28,6 +28,7 @@ opam_packages="
   atdgen
   atdpy
   bloomf
+  core
   cmdliner
   comby-kernel.1.4.1
   conf-pkg-config
