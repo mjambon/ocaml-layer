@@ -12,7 +12,20 @@ os="ubuntu"
 
 # The argument of the FROM line in the dockerfile. This is the docker
 # URL of the base image, optionally followed by more things.
-from="ubuntu"
+#
+# The more recent ubuntu:22.04 is broken, missing a key needed for
+# 'apt-get update'.
+# The following signatures couldn't be verified because the public key is not available: NO_PUBKEY 871920D1991BC93C
+#
+# Additionally, I couldn't install the missing key:
+# $ apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 871920D1991BC93C
+# E: gnupg, gnupg2 and gnupg1 do not seem to be installed, but one of them is required for this operation
+#
+# but the gnupg2 package is no longer available, having been replaced
+# by gpgv.
+#
+#
+from="ubuntu:20.04"
 
 # This is the argument of 'docker pull', 'docker push', etc. for the image
 # we are building.
