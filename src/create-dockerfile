@@ -9,7 +9,7 @@ default_cmd='bash'
 default_os=alpine
 default_extra_packages=''
 default_opam_packages='dune'
-default_opam_switch='4.12.0'
+default_opam_switch='4.14.0'
 default_opam_switch_options=''
 
 usage() {
