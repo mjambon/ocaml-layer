@@ -11,8 +11,13 @@ extra_packages=$*
 echo '@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing' \
      >> /etc/apk/repositories
 
-apk update
-apk upgrade
+# 'apk update' fails at the moment with alpine < 0.15.0, giving this error:
+#
+#   fetch http://dl-cdn.alpinelinux.org/alpine/edge/testing/x86_64/APKINDEX.tar.gz
+#   WARNING: Ignoring http://dl-cdn.alpinelinux.org/alpine/edge/testing/x86_64/APKINDEX.tar.gz: UNTRUSTED signature
+#
+# Not sure if 'apk update' is needed. Seems to work without.
+# apk update
 
 packages="
   bash
@@ -37,7 +42,7 @@ packages="
   $extra_packages
 "
 
-apk add $packages
+apk add --no-cache $packages
 
 if [ -z "$(git config user.email)" ]; then
   git config --global user.email "docker@example.com"

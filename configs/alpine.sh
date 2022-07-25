@@ -12,7 +12,14 @@ os="alpine"
 
 # The argument of the FROM line in the dockerfile. This is the docker
 # URL of the base image, optionally followed by more things.
-from="alpine:3.16.0"
+#
+# With alpine >= 3.14.0, we run into this error:
+#
+#  make: /bin/sh: Operation not permitted
+#
+# See for example https://github.com/docker-library/php/issues/1177#issuecomment-920260435
+#
+from="alpine:3.12.0"
 
 # This is the argument of 'docker pull', 'docker push', etc. for the image
 # we are building.
