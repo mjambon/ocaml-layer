@@ -1,0 +1,10 @@
+RUN echo "Manual commands in the end"
+
+# Use the following to get a more compact image
+RUN du -sh ~/.opam
+RUN find $(opam var bin) -iname '*.byte' -exec rm -fv {} \;
+RUN find $(opam var bin) -iname 'ocamlformat.parser_recover.test*' -exec rm -f {} \;
+RUN find $(opam var lib) -iname '*.cmt' -exec rm -f {} \;
+RUN find $(opam var lib) -iname '*.cmti' -exec rm -f {} \;
+RUN find $(opam var prefix) -iname '*.exe' -exec strip {} \;
+RUN du -sh ~/.opam
