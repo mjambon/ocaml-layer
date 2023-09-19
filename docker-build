@@ -59,6 +59,7 @@ build() {
     cp -a src/os/"$os" tmp/os
     cp -a src/opam tmp
     cp -a src/create-dockerfile tmp
+    cp extra-docker-tail tmp/ -v
 
     extra_build_options=()
     for url in "${extra_docker_urls[@]}"; do
@@ -74,6 +75,7 @@ build() {
         --create-user "$user" \
         --extra-packages "$extra_packages" \
         --opam-packages "$opam_packages" \
+        --extra-docker-tail ./extra-docker-tail \
         --opam-switch "$opam_switch" \
         --opam-switch-options "$opam_switch_options"
       docker build -t "$docker_url" "${extra_build_options[@]}" .
