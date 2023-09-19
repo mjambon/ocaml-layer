@@ -25,7 +25,8 @@ packages="
   $extra_packages
 "
 
-DEBIAN_FRONTEND=noninteractive apt-get install -y $packages
+DEBIAN_FRONTEND=noninteractive apt-get install -y $packages --no-install-recommends
+DEBIAN_FRONTEND=noninteractive apt-get clean -y --no-install-recommends
 
 if [ -z "$(git config user.email)" ]; then
   git config --global user.email "docker@example.com"
