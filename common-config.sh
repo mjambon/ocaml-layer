@@ -25,7 +25,9 @@ opam_packages="
   cmdliner
   csv
   dune
+  fpath
   ocamlgraph
+  re
   sexplib
   utop
 "
