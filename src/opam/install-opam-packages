@@ -7,3 +7,4 @@ set -eu
 
 packages=$(echo $* | sed -e 's/,/ /g')
 opam install -y $packages
+opam clean -y
