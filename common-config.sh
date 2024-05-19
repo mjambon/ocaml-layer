@@ -7,6 +7,7 @@ extra_apk_packages="
   graphviz
   nano
   python3
+  py3-pip
 "
 
 # Ubuntu
@@ -24,8 +25,10 @@ opam_packages="
   containers-data
   cmdliner
   csv
+  duff
   dune
   fpath
+  ocamlformat
   ocamlgraph
   re
   sexplib
