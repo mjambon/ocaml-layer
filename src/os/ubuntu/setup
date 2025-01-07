@@ -22,6 +22,7 @@ packages="
   opam
   pre-commit
   rsync
+  ssh
   sudo
   unzip
   $extra_packages

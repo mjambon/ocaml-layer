@@ -25,6 +25,7 @@ packages="
   nano
   ncurses-dev
   opam
+  openssh
   openssl
   patch
   pre-commit
