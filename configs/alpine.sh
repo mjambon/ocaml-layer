@@ -19,7 +19,9 @@ os="alpine"
 #
 # See for example https://github.com/docker-library/php/issues/1177#issuecomment-920260435
 #
-from="alpine:3.12.0"
+# Only pin to minor version, not patch to ensure rebuilds pull in security
+# fixes.
+from="alpine:3.21"
 
 # This is the argument of 'docker pull', 'docker push', etc. for the image
 # we are building.
@@ -33,7 +35,7 @@ extra_packages="$extra_apk_packages"
 
 # Opam switch to use. This determines the OCaml version and a set of
 # configuration options.
-opam_switch="4.14.0"
+opam_switch="5.2.1"
 
 # The collection of opam packages we want to install. Go wild.
 opam_packages="$opam_packages"

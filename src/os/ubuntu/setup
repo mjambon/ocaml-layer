@@ -11,6 +11,7 @@ extra_packages=$*
 apt-get update
 
 packages="
+  adduser
   bubblewrap
   build-essential
   curl
@@ -19,6 +20,7 @@ packages="
   libx11-dev
   nano
   opam
+  pre-commit
   rsync
   sudo
   unzip
