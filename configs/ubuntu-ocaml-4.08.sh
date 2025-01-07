@@ -14,7 +14,7 @@ os="ubuntu"
 # URL of the base image, optionally followed by more things.
 #
 # Should be the same as in the config 'ubuntu.sh'. See explanations there.
-from="ubuntu:20.04"
+from="ubuntu:24.04"
 
 # This is the argument of 'docker pull', 'docker push', etc. for the image
 # we are building.
